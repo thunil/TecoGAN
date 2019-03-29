@@ -9,5 +9,18 @@ Preprint: <https://arxiv.org/pdf/1811.09393.pdf>
 
 ![TecoGAN teaser image](resources/teaser.jpg)
 
+# Additional Generated Outputs
+
+Below you can find three additional sequences generated with TecoGAN. Our method generates fine details that 
+persist over the course of long generated video sequences. E.g., the mesh structures of the armor,
+the scale patterns of the lizard, and the dots on the back of the spider highlight the capabilities of our method.
+Our temporal discriminator plays a key role to guide the generator network towards producing coherent detail.
+
+![Armor](resources/tecoGAN-armour.gif)
+
+![Lizard](resources/tecoGAN-lizard.gif)
+
+![Spider](resources/tecoGAN-spider.gif)
+
 TUM I15 <https://ge.in.tum.de/> , TUM <https://www.tum.de/>
 
