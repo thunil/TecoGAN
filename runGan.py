@@ -16,6 +16,7 @@ def mycall(cmd):
 
 if( runcase == 0 ): # inference a trained model
     # download the trained model
+    if(not os.path.exists("./model/")): os.mkdir("./model/")
     cmd1 = "wget https://ge.in.tum.de/download/data/TecoGAN/model.zip -O model/model.zip;"
     cmd1 += "unzip model/model.zip -d model; rm model/model.zip"
     subprocess.call(cmd1, shell=True)
