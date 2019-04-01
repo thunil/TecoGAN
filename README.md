@@ -18,7 +18,7 @@ Preprint: <https://arxiv.org/pdf/1811.09393.pdf>
 Below you can find three additional sequences generated with TecoGAN. Our method generates fine details that 
 persist over the course of long generated video sequences. E.g., the mesh structures of the armor,
 the scale patterns of the lizard, and the dots on the back of the spider highlight the capabilities of our method.
-Our temporal discriminator plays a key role to guide the generator network towards producing coherent detail.
+Our spatio-temporal discriminator plays a key role to guide the generator network towards producing coherent detail.
 
 <img src="resources/tecoGAN-lizard.gif" alt="Lizard" width="900"/><br>
 
