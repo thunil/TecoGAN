@@ -31,6 +31,8 @@ Our spatio-temporal discriminator plays a key role to guide the generator networ
 Below you can find a quick start guide.
 For further explanations of the parameters take a look at the runGan.py file. 
 
+Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. `tkinter` is also required and may be installed via the `python3-tk` package.
+
 ```bash
 # Install tensorflow1.8+,
 pip3 install --ignore-installed --upgrade tensorflow-gpu # or tensorflow
