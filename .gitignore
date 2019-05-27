@@ -111,3 +111,6 @@ LR
 results
 # targets
 HR
+# runs
+ex_*
+tx_*

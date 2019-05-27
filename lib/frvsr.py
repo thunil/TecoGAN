@@ -65,7 +65,7 @@ def generator_F(gen_inputs, gen_output_channels, reuse=False, FLAGS=None):
         net = stage1_output
 
         # The residual block parts
-        for i in range(1, FLAGS.num_resblock+1 , 1): # should be 16
+        for i in range(1, FLAGS.num_resblock+1 , 1): # should be 16 for TecoGAN, and 10 for TecoGANmini
             name_scope = 'resblock_%d'%(i)
             net = residual_block(net, 64, 1, name_scope)
 
@@ -78,9 +78,11 @@ def generator_F(gen_inputs, gen_output_channels, reuse=False, FLAGS=None):
         
         with tf.variable_scope('output_stage'):
             net = conv2(net, 3, gen_output_channels, 1, scope='conv')
-            hi_shape = tf.shape( net )
             low_res_in = gen_inputs[:,:,:,0:3] # ignore warped pre high res
-            bicubic_hi = tf.image.resize_bicubic( low_res_in, (hi_shape[1], hi_shape[2]))
+            # for tensoflow API<=1.13, bicubic_four is equivalent to the followings:
+            # hi_shape = tf.shape( net )
+            # bicubic_hi = tf.image.resize_bicubic( low_res_in, (hi_shape[1], hi_shape[2])) # no GPU implementation
+            bicubic_hi = bicubic_four( low_res_in ) # can put on GPU
             net = net + bicubic_hi
             net = preprocess( net )
     return net
