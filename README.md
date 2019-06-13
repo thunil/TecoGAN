@@ -80,11 +80,7 @@ tensorboard --logdir='ex_TecoGANmm-dd-hh/log' --port=8008
 ```
 
 ### Tensorboard GIF Summary Example
-
-<iframe width="100%" height="760" src="./gif_summary_example.html">
-  <p>Your browser does not support iframes, try  <a href="./gif_summary_example.html">gif_summary_example</a>.</p>
-</iframe>
-
+<img src="resources/gif_summary_example.gif" alt="gif_summary_example" width="600"/><br>
 
 ### Acknowledgements
 This work was funded by the ERC Starting Grant realFlow (ERC StG-2015-637014).  
