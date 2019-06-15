@@ -8,7 +8,7 @@ import os, math, time, collections, numpy as np
 Disable Logs for now '''
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
-import tensorflow.python.util.deprecation as deprecation
+from tensorflow.python.util import deprecation
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 import random as rn
 
@@ -37,7 +37,7 @@ Flags.DEFINE_integer('input_dir_len', -1, 'length of the input for inference mod
 Flags.DEFINE_string('input_dir_HR', None, 'The directory of the input resolution input data, for inference mode')
 Flags.DEFINE_string('mode', 'inference', 'train, or inference')
 Flags.DEFINE_string('output_dir', None, 'The output directory of the checkpoint')
-Flags.DEFINE_string('output_pre', 'images', 'The name of the subfolder for the images')
+Flags.DEFINE_string('output_pre', '', 'The name of the subfolder for the images')
 Flags.DEFINE_string('output_name', 'output', 'The pre name of the outputs')
 Flags.DEFINE_string('output_ext', 'jpg', 'The format of the output when evaluating')
 Flags.DEFINE_string('summary_dir', None, 'The dirctory to output the summary')

@@ -46,7 +46,7 @@ python3 runGan.py 0
 python3 runGan.py 1 
 
 # Evaluate the results with 4 metrics, PSNR, LPIPS[1], and our temporal metrics tOF and tLP with pytorch.
-# Take a look of the paper for more details! 
+# Take a look at the paper for more details! 
 python3 runGan.py 2
 
 ```
@@ -55,32 +55,56 @@ python3 runGan.py 2
 
 #### 1. Prepare the Training Data
 
-...download scripts will follow soon...
+The training and validation dataset can be downloaded with the following commands into a chosen directory `TrainingDataPath`.  Note: online video downloading requires youtube-dl.  
+
+```bash
+# Install youtube-dl for online video downloading
+pip install --user --upgrade youtube-dl
+
+# take a look of the parameters first:
+python3 dataPrepare.py --help
+
+# To be on the safe side, if you just want to see what will happen, the following line won't download anything,
+# and will only save information into log file.
+# TrainingDataPath is still important, it the directory where logs are saved: TrainingDataPath/log/logfile_mmddHHMM.txt
+python3 dataPrepare.py --start_id 2000 --duration 120 --disk_path TrainingDataPath --TEST
+
+# This will create 308 subfolders under TrainingDataPath, each with 120 frames, from 28 online videos.
+# It takes a long time.
+python3 dataPrepare.py --start_id 2000 --duration 120 --REMOVE --disk_path TrainingDataPath
+
+
+```
+
+Once ready, please update the parameter TrainingDataPath in runGAN.py (for case 3 and case 4), and then you can start training with the downloaded data! 
+
+Note: most of the data (272 out of 308 sequences) are the same as the ones we used for the published models, but some (36 out of 308) are not online anymore. Hence the script downloads suitable replacements.
+
 
 #### 2. Train the Model  
-This sections gives command to train a new TecoGAN model, 
-detail and additional parameters can be found in the runGan.py file.  
-Note: tensorboard gif summary relies on ffmpeg.
+This section gives command to train a new TecoGAN model. Detail and additional parameters can be found in the runGan.py file. Note: the tensorboard gif summary requires ffmpeg.
 
 ```bash
 # Install ffmpeg for the  gif summary
 sudo apt-get install ffmpeg # or conda install ffmpeg
 
 # Train the TecoGAN model, based on our FRVSR model
-# Please update the parameter VGGPath, using ./model/ by default, VGG model is 500MB
-# Please update the testWhileTrain() function in main.py. It won't affect training, only try to test the newest model.
+# Please check and update the following parameters: 
+# - VGGPath, it uses ./model/ by default. The VGG model is ca. 500MB
+# - TrainingDataPath (see above)
+# - in main.py you can also adjust the output directory of the  testWhileTrain() function if you like (it will write into a train/ sub directory by default)
 python3 runGan.py 3
 
-# Train without Dst, (would be a FRVSR model)
+# Train without Dst, (i.e. a FRVSR model)
 python3 runGan.py 4
 
-# View log on tensorboard
+# View log via tensorboard
 tensorboard --logdir='ex_TecoGANmm-dd-hh/log' --port=8008
 
 ```
 
 ### Tensorboard GIF Summary Example
-<img src="resources/gif_summary_example.gif" alt="gif_summary_example" width="600"/><br>
+<img src="resources/gif_summary_example.gif" alt="gif_summary_example" width="600" hspace="150"/><br>
 
 ### Acknowledgements
 This work was funded by the ERC Starting Grant realFlow (ERC StG-2015-637014).  

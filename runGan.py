@@ -82,7 +82,8 @@ elif( runcase == 1 ): # inference a trained model
             #"--input_dir_HR", os.path.join("./HR/", testpre[nn]),  # the HR directory
             # one of (input_dir_HR,input_dir_LR) should be given
             "--output_pre", testpre[nn], # the subfolder to save current scene, optional
-            "--num_resblock", "16",
+            "--num_resblock", "16",  # our model has 16 residual blocks, 
+            # the pre-trained FRVSR and TecoGAN mini have 10 residual blocks
             "--checkpoint", './model/TecoGAN',  # the path of the trained model,
             "--output_ext", "png"               # png is more accurate, jpg is smaller
         ]
@@ -162,7 +163,17 @@ elif( runcase == 3 ): # Train TecoGAN
         "--vgg_scaling", "0.2",
         "--vgg_ckpt", VGGModelPath, # necessary if vgg_scaling > 0
     ]
-    '''Video Training data... todo...'''
+    '''Video Training data:
+    please udate the TrainingDataPath according to ReadMe.md
+    input_video_pre is hard coded as scene in dataPrepare.py at line 142
+    str_dir is the starting index for training data
+    end_dir is the ending index for training data
+    end_dir+1 is the starting index for validation data
+    end_dir_val is the ending index for validation data
+    max_frm should be duration (in dataPrepare.py) -1
+    queue_thread: how many cpu can be used for loading data when training
+    name_video_queue_capacity, video_queue_capacity: how much memory can be used
+    '''
     cmd1 += [
         "--input_video_dir", TrainingDataPath, 
         "--input_video_pre", "scene",
@@ -259,7 +270,7 @@ elif( runcase == 4 ): # Train FRVSR, loss = l2 warp + l2 content
         "--ratio", "-0.01",  # the ratio for the adversarial loss, negative means disabled
         "--nopingpang",
     ]
-    '''Video Training data... todo...'''
+    '''Video Training data... Same as runcase 3...'''
     TrainingDataPath = "/mnt/netdisk/video_data/"
     cmd1 += [
         "--input_video_dir", TrainingDataPath, 

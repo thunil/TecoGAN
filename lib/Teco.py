@@ -366,7 +366,8 @@ def TecoGAN(r_inputs, r_targets, FLAGS, GAN_Flag=True):
                 # an l1 loss
                 pploss = tf.reduce_mean(tf.abs(gen_out_first - gen_out_last_rev))
             
-            gen_loss += pploss * FLAGS.pp_scaling
+            if FLAGS.pp_scaling > 0:
+                gen_loss += pploss * FLAGS.pp_scaling
             update_list += [pploss]
             update_list_name += ["PingPang"]
         
