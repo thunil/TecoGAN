@@ -129,7 +129,7 @@ for keys in video_data_dict:
     
     # check the downloaded video
     tar_vid_output = os.path.join(Flags.disk_path, keys+'.'+info_dict["ext"])
-    if not os.path.exists(tar_vid_output):
+    if saveframes and (not os.path.exists(tar_vid_output)):
         print("Skipped invalid link or other error:" + tar_vid_input)
         continue
     if info_dict["width"] < 400 or info_dict["height"] < 400:
