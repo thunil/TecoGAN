@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import torch
 import LPIPSmodels.util as util
 from torch.autograd import Variable
