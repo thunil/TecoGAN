@@ -17,7 +17,7 @@ parser.add_argument('--TEST', action='store_true', help='verify video links, sav
 
 Flags = parser.parse_args()
 
-if Flags.summary_dir is "":
+if Flags.summary_dir == "":
     Flags.summary_dir = os.path.join(Flags.disk_path, "log/")
 os.path.isdir(Flags.disk_path) or os.makedirs(Flags.disk_path)
 os.path.isdir(Flags.summary_dir) or os.makedirs(Flags.summary_dir)
