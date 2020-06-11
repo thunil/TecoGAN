@@ -46,5 +46,8 @@ libxext6
 run pip3 install \
 youtube-dl
 
+run apt-get update && apt-get install -y \
+ffmpeg
+
 #run pip uninstall -y numpy && pip install numpy==1.14.3
 
