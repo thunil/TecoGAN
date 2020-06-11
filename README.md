@@ -30,17 +30,19 @@ Our spatio-temporal discriminator plays a key role to guide the generator networ
 Below you can find a quick start guide for running a trained TecoGAN model.
 For further explanations of the parameters take a look at the runGan.py file.  
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
-`tkinter` is also required and may be installed via the `python3-tk` package.
 
+#### 1. Build the docker image
 ```bash
-# Install tensorflow1.8+,
-pip3 install --ignore-installed --upgrade tensorflow-gpu # or tensorflow
-# Install PyTorch (only necessary for the metric evaluations) and other things...
-pip3 install -r requirements.txt
+docker build docker -t tecogan_image
+```
 
-# Download our TecoGAN model, the _Vid4_ and _TOS_ scenes shown in our paper and video.
-python3 runGan.py 0
+#### 2. Start the docker container we just build
+```bash
+docker run --gpus all -it --mount src=$(pwd),target=/TecoGAN,type=bind -w /TecoGAN tecogan_image bash
+```
 
+#### 3. Run the model
+```bash
 # Run the inference mode on the calendar scene.
 # You can take a look of the parameter explanations in the runGan.py, feel free to try other scenes!
 python3 runGan.py 1 
