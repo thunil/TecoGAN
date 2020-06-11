@@ -39,3 +39,5 @@ youtube-dl
 run apt-get update && apt-get install -y \
 ffmpeg
 
+run pip3 install \
+ffmpeg==1.4
