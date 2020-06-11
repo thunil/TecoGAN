@@ -31,17 +31,20 @@ Below you can find a quick start guide for running a trained TecoGAN model.
 For further explanations of the parameters take a look at the runGan.py file.  
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
 
-#### 1. Build the docker image
+#### 1. Install Docker
+[https://docs.docker.com/install/]
+
+#### 2. Build the docker image
 ```bash
 docker build docker -t tecogan_image
 ```
 
-#### 2. Start the docker container we just build
+#### 3. Start the docker container we just build
 ```bash
 docker run --gpus all -it --mount src=$(pwd),target=/TecoGAN,type=bind -w /TecoGAN tecogan_image bash
 ```
 
-#### 3. Run the model
+#### 4. Run the model
 ```bash
 # Run the inference mode on the calendar scene.
 # You can take a look of the parameter explanations in the runGan.py, feel free to try other scenes!
