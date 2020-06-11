@@ -41,3 +41,5 @@ ffmpeg
 
 run pip3 install \
 ffmpeg==1.4
+
+env TF_FORCE_GPU_ALLOW_GROWTH=true
