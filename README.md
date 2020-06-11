@@ -60,9 +60,6 @@ python3 runGan.py 2
 The training and validation dataset can be downloaded with the following commands into a chosen directory `TrainingDataPath`.  Note: online video downloading requires youtube-dl.  
 
 ```bash
-# Install youtube-dl for online video downloading
-pip install --user --upgrade youtube-dl
-
 # take a look of the parameters first:
 python3 dataPrepare.py --help
 
