@@ -19,7 +19,7 @@ pandas==0.23.1 \
 Keras==2.1.2 \
 torch==0.4.0 \
 torchvision==0.2.1 \
-opencv-python \
+opencv-python==4.2.0.34 \
 ipython==7.4.0
 
 run apt-get update && apt-get install -y \
