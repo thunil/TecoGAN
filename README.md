@@ -87,9 +87,6 @@ Note: most of the data (272 out of 308 sequences) are the same as the ones we us
 This section gives command to train a new TecoGAN model. Detail and additional parameters can be found in the runGan.py file. Note: the tensorboard gif summary requires ffmpeg.
 
 ```bash
-# Install ffmpeg for the  gif summary
-sudo apt-get install ffmpeg # or conda install ffmpeg
-
 # Train the TecoGAN model, based on our FRVSR model
 # Please check and update the following parameters: 
 # - VGGPath, it uses ./model/ by default. The VGG model is ca. 500MB
