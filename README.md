@@ -96,7 +96,10 @@ python3 runGan.py 3
 
 # Train without Dst, (i.e. a FRVSR model)
 python3 runGan.py 4
+```
 
+Run the the following outside of the docker container:
+```bash
 # View log via tensorboard
 tensorboard --logdir='ex_TecoGANmm-dd-hh/log' --port=8008
 
