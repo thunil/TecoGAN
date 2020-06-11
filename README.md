@@ -98,10 +98,10 @@ python3 runGan.py 3
 python3 runGan.py 4
 ```
 
-Run the the following outside of the docker container:
+Run the the following outside of the docker container (you need to insert the appropriate path for the log dir):
 ```bash
 # View log via tensorboard
-tensorboard --logdir='ex_TecoGANmm-dd-hh/log' --port=8008
+tensorboard --logdir='ex_TecoGANmm-dd-hh/log'
 
 ```
 
