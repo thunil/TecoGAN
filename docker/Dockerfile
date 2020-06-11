@@ -43,4 +43,8 @@ libsm6 \
 libxrender1 \
 libxext6
 
+run pip3 install \
+youtube-dl
+
 #run pip uninstall -y numpy && pip install numpy==1.14.3
+
