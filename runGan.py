@@ -132,7 +132,7 @@ elif( runcase == 3 ): # Train TecoGAN
         cmd0 += "unzip model/ofrvsr.zip -d model; rm model/ofrvsr.zip"
         subprocess.call(cmd0, shell=True)
     
-    TrainingDataPath = "/mnt/netdisk/video_data/" 
+    TrainingDataPath = "./TrainingDataPath/" 
     
     '''Prepare Training Folder'''
     # path appendix, manually define it, or use the current datetime, now_str = "mm-dd-hh"
@@ -271,7 +271,7 @@ elif( runcase == 4 ): # Train FRVSR, loss = l2 warp + l2 content
         "--nopingpang",
     ]
     '''Video Training data... Same as runcase 3...'''
-    TrainingDataPath = "/mnt/netdisk/video_data/"
+    TrainingDataPath = "./TrainingDataPath/"
     cmd1 += [
         "--input_video_dir", TrainingDataPath, 
         "--input_video_pre", "scene",
