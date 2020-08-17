@@ -1,29 +1,4 @@
 # TecoGAN Docker
-This repository contains source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN for video super-resolution.
-_Authors: Mengyu Chu, You Xie, Laura Leal-Taixe, Nils Thuerey. Technical University of Munich._
-
-This repository so far contains the code for the TecoGAN _inference_ 
-and _training_. Data generation, i.e., download, will follow soon.
-Pre-trained models are also available below, you can find links for downloading and instructions below.
-The video and pre-print of our paper can be found here:
-
-Video: <https://www.youtube.com/watch?v=pZXFXtfd-Ak>
-Preprint: <https://arxiv.org/pdf/1811.09393.pdf>
-
-![TecoGAN teaser image](resources/teaser.jpg)
-
-### Additional Generated Outputs
-
-Our method generates fine details that 
-persist over the course of long generated video sequences. E.g., the mesh structures of the armor,
-the scale patterns of the lizard, and the dots on the back of the spider highlight the capabilities of our method.
-Our spatio-temporal discriminator plays a key role to guide the generator network towards producing coherent detail.
-
-<img src="resources/tecoGAN-lizard.gif" alt="Lizard" width="900"/><br>
-
-<img src="resources/tecoGAN-armour.gif" alt="Armor" width="900"/><br>
-
-<img src="resources/tecoGAN-spider.gif" alt="Spider" width="600" hspace="150"/><br>
 
 ### Running the TecoGAN Model
 
@@ -55,6 +30,41 @@ python3 runGan.py 1
 python3 runGan.py 2
 
 ```
+
+
+
+
+
+
+# TecoGAN
+
+This repository contains source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN for video super-resolution.
+_Authors: Mengyu Chu, You Xie, Laura Leal-Taixe, Nils Thuerey. Technical University of Munich._
+
+This repository so far contains the code for the TecoGAN _inference_ 
+and _training_. Data generation, i.e., download, will follow soon.
+Pre-trained models are also available below, you can find links for downloading and instructions below.
+The video and pre-print of our paper can be found here:
+
+Video: <https://www.youtube.com/watch?v=pZXFXtfd-Ak>
+Preprint: <https://arxiv.org/pdf/1811.09393.pdf>
+
+![TecoGAN teaser image](resources/teaser.jpg)
+
+### Additional Generated Outputs
+
+Our method generates fine details that 
+persist over the course of long generated video sequences. E.g., the mesh structures of the armor,
+the scale patterns of the lizard, and the dots on the back of the spider highlight the capabilities of our method.
+Our spatio-temporal discriminator plays a key role to guide the generator network towards producing coherent detail.
+
+<img src="resources/tecoGAN-lizard.gif" alt="Lizard" width="900"/><br>
+
+<img src="resources/tecoGAN-armour.gif" alt="Armor" width="900"/><br>
+
+<img src="resources/tecoGAN-spider.gif" alt="Spider" width="600" hspace="150"/><br>
+
+
 
 ### Train the TecoGAN Model
 
