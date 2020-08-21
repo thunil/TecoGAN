@@ -1,5 +1,6 @@
 import numpy as np
 import os, math, time, collections, numpy as np
+import datetime
 ''' TF_CPP_MIN_LOG_LEVEL
 0 = all messages are logged (default behavior)
 1 = INFO messages are not printed
@@ -270,10 +271,12 @@ if FLAGS.mode == 'inference':
             if(i >= 5): 
                 name, _ = os.path.splitext(os.path.basename(str(inference_data.paths_LR[i])))
                 filename = FLAGS.output_name+'_'+name
+                print(datetime.datetime.now(),end=' ')
                 print('saving image %s' % filename)
                 out_path = os.path.join(image_dir, "%s.%s"%(filename,FLAGS.output_ext))
                 save_img(out_path, output_frame[0])
             else:# First 5 is a hard-coded symmetric frame padding, ignored but time added!
+                print(datetime.datetime.now(),end=' ')
                 print("Warming up %d"%(5-i))
     print( "total time " + str(srtime) + ", frame number " + str(max_iter) )
         
