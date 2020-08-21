@@ -9,3 +9,4 @@ torchvision>=0.3.0
 opencv-python>=3.1.0.5
 ipython>=7.4.0
 gdown==3.12.2
+tensorflow==1.15
