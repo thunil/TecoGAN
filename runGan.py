@@ -79,7 +79,7 @@ if( runcase == 0 ): # download inference data, trained models
     url = 'https://drive.google.com/uc?id=1nAnfjuybWPTiKRGWM4wFQbAwu-bs4wBk'
     output = 'HR/vid4.zip'
     gdown.download(url, output, quiet=False)
-    md5 = 'fa837a88f0c40c513d975104edf3da17'
+    md5 = '495ce0b3dbf5f9f5bd105029b1fde13f'
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     #cmd3 = "wget https://ge.in.tum.de/download/data/TecoGAN/vid4_HR.zip -O ;"
     cmd3 = "rm HR/vid4.zip" #unzip HR/vid4.zip -d HR;
