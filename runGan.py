@@ -98,7 +98,8 @@ if( runcase == 0 ): # download inference data, trained models
 elif( runcase == 1 ): # inference a trained model
     
     dirstr = './results/' # the place to save the results
-    testpre = ['calendar'] # the test cases
+    testpre = ['My_video'] # the test cases
+    
 
     if (not os.path.exists(dirstr)): os.mkdir(dirstr)
     
@@ -109,7 +110,7 @@ elif( runcase == 1 ): # inference a trained model
             "--output_dir",  dirstr,    # Set the place to put the results.
             "--summary_dir", os.path.join(dirstr, 'log/'), # Set the place to put the log. 
             "--mode","inference", 
-            "--input_dir_LR", os.path.join("./LR/", testpre[nn]),   # the LR directory
+            "--input_dir_LR", os.path.join("./LR/", testpre[nn]),   # the LR directory 
             #"--input_dir_HR", os.path.join("./HR/", testpre[nn]),  # the HR directory
             # one of (input_dir_HR,input_dir_LR) should be given
             "--output_pre", testpre[nn], # the subfolder to save current scene, optional
