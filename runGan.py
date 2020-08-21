@@ -50,19 +50,19 @@ if( runcase == 0 ): # download inference data, trained models
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     
     #cmd1 = "wget https://ge.in.tum.de/download/data/TecoGAN/model.zip -O model/model.zip;"
-    cmd1 = "rm model/model.zip" #unzip model/model.zip -d model;  cmd1+=
+    cmd1 = "unzip model/model.zip -d model; rm model/model.zip" # cmd1+=
     subprocess.call(cmd1, shell=True)
     
     # download some test data    
     if(not os.path.exists("./LR/")): os.mkdir("./LR/")
+        
     url = 'https://drive.google.com/uc?id=1_u-tZgnuEzmkjH4PjVT5u_B8Vyn6IWIj'
     output = 'LR/vid3.zip'
     gdown.download(url, output, quiet=False)
     md5 = '5ed0709b2073aff81139d1b1230e3f73'
-    gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
-    
+    gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)    
     #cmd2 = "wget https://ge.in.tum.de/download/data/TecoGAN/vid3_LR.zip -O LR/vid3.zip;"
-    cmd2 = "rm LR/vid3.zip" #unzip LR/vid3.zip -d LR;  cmd2+=
+    cmd2 = "unzip LR/vid3.zip -d LR; rm LR/vid3.zip" #  cmd2+=
     subprocess.call(cmd2, shell=True)
     
     url = 'https://drive.google.com/uc?id=1XpwEpzmAQDSviBW82CkP0Mr15d_rbHiG'
@@ -71,7 +71,7 @@ if( runcase == 0 ): # download inference data, trained models
     md5 = 'a944d5a6509fa08689b7010297a8e0b0'
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     #cmd2 = "wget https://ge.in.tum.de/download/data/TecoGAN/tos_LR.zip -O LR/tos.zip;"
-    cmd2 = "rm LR/tos.zip" #unzip LR/tos.zip -d LR; 
+    cmd2 = "unzip LR/tos.zip -d LR; rm LR/tos.zip" 
     subprocess.call(cmd2, shell=True)
     
     # download the ground-truth data    
@@ -82,7 +82,7 @@ if( runcase == 0 ): # download inference data, trained models
     md5 = '495ce0b3dbf5f9f5bd105029b1fde13f'
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     #cmd3 = "wget https://ge.in.tum.de/download/data/TecoGAN/vid4_HR.zip -O ;"
-    cmd3 = "rm HR/vid4.zip" #unzip HR/vid4.zip -d HR;
+    cmd3 = "unzip HR/vid4.zip -d HR;rm HR/vid4.zip" #
     subprocess.call(cmd3, shell=True)
     
     
@@ -92,7 +92,7 @@ if( runcase == 0 ): # download inference data, trained models
     md5 = '06db8e5fbccb0c1eb51bf0100288ef5c'
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     #cmd3 = "wget https://ge.in.tum.de/download/data/TecoGAN/tos_HR.zip -O HR/tos.zip;"
-    cmd3 = "rm HR/tos.zip" #unzip HR/tos.zip -d HR; 
+    cmd3 = "unzip HR/tos.zip -d HR; rm HR/tos.zip" #
     subprocess.call(cmd3, shell=True)
     
 elif( runcase == 1 ): # inference a trained model
