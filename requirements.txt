@@ -5,7 +5,7 @@ matplotlib==1.5.1
 pandas==0.23.1
 Keras==2.1.2
 torch==0.4.1
-torchvision==0.2.1
+torchvision>=0.5.0
 opencv-python==3.1.0.5
 ipython==7.4.0
 gdown==3.12.2
