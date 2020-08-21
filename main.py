@@ -16,7 +16,11 @@ import random as rn
 os.environ['PYTHONHASHSEED'] = '0'
 np.random.seed(42)
 rn.seed(12345)
-tf.set_random_seed(1234)
+try:
+  tf.set_random_seed(1234)
+except Exception as e:
+  print("ERROR SOLVED")
+  tf.random.set_seed(12345)
 
 import tensorflow.contrib.slim as slim
 import sys, shutil, subprocess
@@ -110,7 +114,11 @@ os.environ["CUDA_VISIBLE_DEVICES"]=FLAGS.cudaID
 my_seed = FLAGS.rand_seed
 rn.seed(my_seed)
 np.random.seed(my_seed)
-tf.set_random_seed(my_seed)
+try:
+  tf.set_random_seed(my_seed)
+except Exception as e:
+  print("ERROR SOLVED")
+  tf.random.set_seed(my_seed)
 
 # Check the output_dir is given
 if FLAGS.output_dir is None:
