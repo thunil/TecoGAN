@@ -68,7 +68,7 @@ if( runcase == 0 ): # download inference data, trained models
     url = 'https://drive.google.com/uc?id=1XpwEpzmAQDSviBW82CkP0Mr15d_rbHiG'
     output = 'LR/tos.zip'
     gdown.download(url, output, quiet=False)
-    md5 = 'fa837a88f0c40c513d975104edf3da17'
+    md5 = 'a944d5a6509fa08689b7010297a8e0b0'
     gdown.cached_download(url, output, md5=md5, postprocess=gdown.extractall)
     #cmd2 = "wget https://ge.in.tum.de/download/data/TecoGAN/tos_LR.zip -O LR/tos.zip;"
     cmd2 = "rm LR/tos.zip" #unzip LR/tos.zip -d LR; 
