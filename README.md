@@ -4,23 +4,51 @@
 
 Below you can find a quick start guide for running a trained TecoGAN model.
 For further explanations of the parameters take a look at the runGan.py file.  
-Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
+Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA` and Linux. 
 
 #### 1. Install docker
+On Ubuntu/Debian/Linux-Mint etc.:
+```
+sudo apt-get install docker.io
+sudo systemctl enable --now docker
+```
+Instructions for other platforms:
 https://docs.docker.com/install/
 
-#### 2. Build the docker image
+
+#### 2. Install the NVIDIA Container Toolkit
+This step will only work on Linux and is only necessary if you want GPU support.
+As far as I know it's not possible to use the GPU with docker under Windows/Mac.
+
+On Ubuntu/Debian/Linux-Mint etc.:
+```sh
+# Add the package repositories
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+```
+
+Instructions for other platforms:
+https://github.com/NVIDIA/nvidia-docker
+
+#### 3. Build the docker image
 ```bash
 docker build docker -t tecogan_image
 ```
 
-#### 3. Start the docker container we just build
+#### 4. Start the docker container we just build
 ```bash
 docker run --gpus all -it --mount src=$(pwd),target=/TecoGAN,type=bind -w /TecoGAN tecogan_image bash
 ```
 
-#### 4. Run the model
+#### 5. Run the model
 ```bash
+# Download our TecoGAN model, the _Vid4_ and _TOS_ scenes shown in our paper and video.
+python3 runGan.py 0
+
 # Run the inference mode on the calendar scene.
 # You can take a look of the parameter explanations in the runGan.py, feel free to try other scenes!
 python3 runGan.py 1 
