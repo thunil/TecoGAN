@@ -26,8 +26,6 @@ run apt-get update && apt-get install -y \
 wget \
 unzip
 
-run python3 runGan.py 0
-
 run apt-get update && apt-get install -y \
 libsm6 \
 libxrender1 \
