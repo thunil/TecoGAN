@@ -31,7 +31,7 @@ Below you can find a quick start guide for running a trained TecoGAN model.
 For further explanations of the parameters take a look at the runGan.py file.  
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA` and Linux. 
 
-#### 1. Install docker
+##### 1. Install docker
 On Ubuntu/Debian/Linux-Mint etc.:
 ```
 sudo apt-get install docker.io
