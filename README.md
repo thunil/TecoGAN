@@ -32,9 +32,28 @@ For further explanations of the parameters take a look at the runGan.py file.
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
 
 #### 1. Install docker
+On Ubuntu/Debian/Linux-Mint etc.:
+```
+sudo apt-get install docker.io
+sudo systemctl enable --now docker
+```
+Instructions for other platforms:
 https://docs.docker.com/install/
 
+
 #### 2. Install the NVIDIA Container Toolkit
+On Ubuntu/Debian/Linux-Mint etc.:
+```sh
+# Add the package repositories
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+
+sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+```
+
+Instructions for other platforms:
 https://github.com/NVIDIA/nvidia-docker
 
 #### 3. Build the docker image
