@@ -29,7 +29,7 @@ Our spatio-temporal discriminator plays a key role to guide the generator networ
 
 Below you can find a quick start guide for running a trained TecoGAN model.
 For further explanations of the parameters take a look at the runGan.py file.  
-Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
+Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA` and Linux. 
 
 #### 1. Install docker
 On Ubuntu/Debian/Linux-Mint etc.:
@@ -42,6 +42,9 @@ https://docs.docker.com/install/
 
 
 #### 2. Install the NVIDIA Container Toolkit
+This step will only work on Linux and is only necessary if you want GPU support.
+As far as I know it's not possible to use the GPU with docker under Windows/Mac.
+
 On Ubuntu/Debian/Linux-Mint etc.:
 ```sh
 # Add the package repositories
