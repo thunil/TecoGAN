@@ -3,8 +3,10 @@ scipy>=1.0.1
 scikit-image>=0.13.0
 matplotlib>=1.5.1
 pandas>=0.23.1
-Keras>=2.1.2
+tensorflow==1.15.0 
+keras==2.1.2
 torch>=0.4.0
 torchvision>=0.2.1
 opencv-python>=2.4.11
 ipython>=7.4.0
+gdown>=3.12.2
