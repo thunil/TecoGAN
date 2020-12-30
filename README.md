@@ -32,6 +32,8 @@ For further explanations of the parameters take a look at the runGan.py file.
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
 `tkinter` is also required and may be installed via the `python3-tk` package.
 
+Either follow the instructions for the [docker environment](https://github.com/tom-doerr/TecoGAN) or run it without docker using the following instructions:
+
 ```bash
 # Install tensorflow1.8+,
 pip3 install --ignore-installed --upgrade tensorflow-gpu # or tensorflow
