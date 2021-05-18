@@ -1,4 +1,4 @@
-# TecoGAN Docker (Not completelly implemented)
+# TecoGAN Docker (Not fully implemented)
 
 ### Running the TecoGAN Model
 
