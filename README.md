@@ -2,13 +2,13 @@
 This repository contains source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN for video super-resolution.
 _Authors: Mengyu Chu, You Xie, Laura Leal-Taixe, Nils Thuerey. Technical University of Munich._
 
-This repository so far contains the code for the TecoGAN _inference_ 
-and _training_. Data generation, i.e., download, will follow soon.
+This repository so far contains the code for the TecoGAN _inference_ and _training_, and downloading the training data.
 Pre-trained models are also available below, you can find links for downloading and instructions below.
-The video and pre-print of our paper can be found here:
+This work was published in the ACM Transactions on Graphics as "Learning Temporal Coherence via Self-Supervision for GAN-based Video Generation (TecoGAN)", https://doi.org/10.1145/3386569.3392457. The video and pre-print can be found here:
 
 Video: <https://www.youtube.com/watch?v=pZXFXtfd-Ak>
 Preprint: <https://arxiv.org/pdf/1811.09393.pdf>
+Supplemental results: <https://ge.in.tum.de/wp-content/uploads/2020/05/ClickMe.html>
 
 ![TecoGAN teaser image](resources/teaser.jpg)
 
