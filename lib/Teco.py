@@ -465,7 +465,7 @@ def TecoGAN(r_inputs, r_targets, FLAGS, GAN_Flag=True):
                         gen_grads_and_vars1 = gen_optimizer.compute_gradients(gen_loss, gen_tvars)
                         fnet_grads_and_vars1 = fnet_optimizer.compute_gradients(fnet_loss, fnet_tvars)                    
                         gen_train1 = gen_optimizer.apply_gradients(gen_grads_and_vars1)
-                        fnet_train1 = gen_optimizer.apply_gradients(fnet_grads_and_vars1)
+                        fnet_train1 = fnet_optimizer.apply_gradients(fnet_grads_and_vars1)
                     return gen_train1, fnet_train1, gen_grads_and_vars1, fnet_grads_and_vars1
                     
                     
@@ -478,7 +478,7 @@ def TecoGAN(r_inputs, r_targets, FLAGS, GAN_Flag=True):
                         gen_grads_and_vars2 = gen_optimizer.compute_gradients(gen_loss, gen_tvars)
                         fnet_grads_and_vars2 = fnet_optimizer.compute_gradients(fnet_loss, fnet_tvars)                    
                         gen_train2 = gen_optimizer.apply_gradients(gen_grads_and_vars2)
-                        fnet_train2 = gen_optimizer.apply_gradients(fnet_grads_and_vars2)
+                        fnet_train2 = fnet_optimizer.apply_gradients(fnet_grads_and_vars2)
 
                     return gen_train2, fnet_train2, gen_grads_and_vars2, fnet_grads_and_vars2
                 
