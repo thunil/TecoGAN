@@ -16,7 +16,7 @@ import random as rn
 os.environ['PYTHONHASHSEED'] = '0'
 np.random.seed(42)
 rn.seed(12345)
-tf.set_random_seed(1234)
+tf.compat.v1.set_random_seed(1234)
 
 import tensorflow.contrib.slim as slim
 import sys, shutil, subprocess
@@ -110,7 +110,7 @@ os.environ["CUDA_VISIBLE_DEVICES"]=FLAGS.cudaID
 my_seed = FLAGS.rand_seed
 rn.seed(my_seed)
 np.random.seed(my_seed)
-tf.set_random_seed(my_seed)
+tf.compat.v1.set_random_seed(my_seed)
 
 # Check the output_dir is given
 if FLAGS.output_dir is None:
@@ -135,7 +135,7 @@ class Logger(object):
         
 sys.stdout = Logger()
 
-def printVariable(scope, key = tf.GraphKeys.MODEL_VARIABLES):
+def printVariable(scope, key = tf.compat.v1.GraphKeys.MODEL_VARIABLES):
     print("Scope %s:" % scope)
     variables_names = [ [v.name, v.get_shape().as_list()] for v in tf.get_collection(key, scope=scope)]
     total_sz = 0
