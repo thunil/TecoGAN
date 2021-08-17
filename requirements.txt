@@ -8,3 +8,4 @@ torch>=0.4.0
 torchvision>=0.2.1
 opencv-python>=2.4.11
 ipython>=7.4.0
+gdown
