@@ -72,16 +72,16 @@ elif( runcase == 1 ): # inference a trained model
     if (not os.path.exists(dirstr)): os.mkdir(dirstr)
     
     # run these test cases one by one:
-    for nn in range(len(testpre)):
+    for _, nn in enumerate(testpre):
         cmd1 = ["python3", "main.py",
             "--cudaID", "0",            # set the cudaID here to use only one GPU
             "--output_dir",  dirstr,    # Set the place to put the results.
             "--summary_dir", os.path.join(dirstr, 'log/'), # Set the place to put the log. 
             "--mode","inference", 
-            "--input_dir_LR", os.path.join("./LR/", testpre[nn]),   # the LR directory
-            #"--input_dir_HR", os.path.join("./HR/", testpre[nn]),  # the HR directory
+            "--input_dir_LR", os.path.join("./LR/", nn),   # the LR directory
+            #"--input_dir_HR", os.path.join("./HR/", nn),  # the HR directory
             # one of (input_dir_HR,input_dir_LR) should be given
-            "--output_pre", testpre[nn], # the subfolder to save current scene, optional
+            "--output_pre", nn, # the subfolder to save current scene, optional
             "--num_resblock", "16",  # our model has 16 residual blocks, 
             # the pre-trained FRVSR and TecoGAN mini have 10 residual blocks
             "--checkpoint", './model/TecoGAN',  # the path of the trained model,
