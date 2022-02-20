@@ -32,10 +32,12 @@ For further explanations of the parameters take a look at the runGan.py file.
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
 `tkinter` is also required and may be installed via the `python3-tk` package.
 
-*TENSORFLOW 2*
-# For Tensorlow2 compatibility, you need to install:
+### Tensorflow 2
+#### For Tensorlow2 compatibility, you need to install:
+```bash
 pip install tf_slim
 pip install tensorflow_addons
+```bash
 
 ```bash
 # Install tensorflow1.8+,
