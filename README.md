@@ -41,6 +41,11 @@ pip3 install -r requirements.txt
 # Download our TecoGAN model, the _Vid4_ and _TOS_ scenes shown in our paper and video.
 python3 runGan.py 0
 
+*TENSORFLOW 2*
+# For Tensorlow2 compatibility, you need to install:
+pip install tf_slim
+pip install tensorflow_addons
+
 # Run the inference mode on the calendar scene.
 # You can take a look of the parameter explanations in the runGan.py, feel free to try other scenes!
 python3 runGan.py 1 
