@@ -37,7 +37,7 @@ Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`.
 ```bash
 pip install tf_slim
 pip install tensorflow_addons
-```bash
+```
 
 ```bash
 # Install tensorflow1.8+,
