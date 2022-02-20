@@ -7,7 +7,9 @@ import os, math, time, collections, numpy as np
 3 = INFO, WARNING, and ERROR messages are not printed
 Disable Logs for now '''
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+import tensorflow_addons as tfa
+import tf_slim as slim
 from tensorflow.python.util import deprecation
 deprecation._PRINT_DEPRECATION_WARNINGS = False
 import random as rn
@@ -18,7 +20,6 @@ np.random.seed(42)
 rn.seed(12345)
 tf.set_random_seed(1234)
 
-import tensorflow.contrib.slim as slim
 import sys, shutil, subprocess
 
 from lib.ops import *
@@ -26,6 +27,7 @@ from lib.dataloader import inference_data_loader, frvsr_gpu_data_loader
 from lib.frvsr import generator_F, fnet
 from lib.Teco import FRVSR, TecoGAN
 
+tf.disable_eager_execution()
 
 Flags = tf.app.flags
 
@@ -212,7 +214,7 @@ if FLAGS.mode == 'inference':
         gen_flow_lr = tf.pad(gen_flow_lr, paddings, "SYMMETRIC") 
         gen_flow = upscale_four(gen_flow_lr*4.0)
         gen_flow.set_shape( output_shape[:-1]+[2] )
-    pre_warp_hi = tf.contrib.image.dense_image_warp(pre_gen, gen_flow)
+    pre_warp_hi = tfa.image.dense_image_warp(pre_gen, gen_flow)
     before_ops = tf.assign(pre_warp, pre_warp_hi)
 
     print('Finish building the network')

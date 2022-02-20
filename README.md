@@ -32,6 +32,11 @@ For further explanations of the parameters take a look at the runGan.py file.
 Note: evaluation (test case 2) currently requires an Nvidia GPU with `CUDA`. 
 `tkinter` is also required and may be installed via the `python3-tk` package.
 
+*TENSORFLOW 2*
+# For Tensorlow2 compatibility, you need to install:
+pip install tf_slim
+pip install tensorflow_addons
+
 ```bash
 # Install tensorflow1.8+,
 pip3 install --ignore-installed --upgrade tensorflow-gpu # or tensorflow
@@ -40,11 +45,6 @@ pip3 install -r requirements.txt
 
 # Download our TecoGAN model, the _Vid4_ and _TOS_ scenes shown in our paper and video.
 python3 runGan.py 0
-
-*TENSORFLOW 2*
-# For Tensorlow2 compatibility, you need to install:
-pip install tf_slim
-pip install tensorflow_addons
 
 # Run the inference mode on the calendar scene.
 # You can take a look of the parameter explanations in the runGan.py, feel free to try other scenes!
