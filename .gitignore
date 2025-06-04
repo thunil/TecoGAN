@@ -1,116 +1,49 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# http://www.gnu.org/software/automake
 
-# C extensions
-*.so
+Makefile.in
+/ar-lib
+/mdate-sh
+/py-compile
+/test-driver
+/ylwrap
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+# http://www.gnu.org/software/autoconf
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+autom4te.cache
+/autoscan.log
+/autoscan-*.log
+/aclocal.m4
+/compile
+/config.guess
+/config.h.in
+/config.log
+/config.status
+/config.sub
+/configure
+/configure.scan
+/depcomp
+/install-sh
+/missing
+/stamp-h1
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# https://www.gnu.org/software/libtool/
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
+/ltmain.sh
 
-# Translations
-*.mo
-*.pot
+# http://www.gnu.org/software/texinfo
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
+/texinfo.tex
 
-# Flask stuff:
-instance/
-.webassets-cache
+# http://www.gnu.org/software/m4/
 
-# Scrapy stuff:
-.scrapy
+m4/libtool.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+m4/lt~obsolete.m4
 
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-
-# others
-# TecoGAN model
-model
-# inputs
-LR
-# outputs
-results
-# targets
-HR
-# runs
-ex_*
-tx_*
+# Generated Makefile 
+# (meta build system like autotools, 
+# can automatically generate from config.status script
+# (which is called by configure script))
+Makefile
