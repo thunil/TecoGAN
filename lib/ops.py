@@ -236,10 +236,10 @@ def random_flip(input, decision):
 
 # The operation used to print out the configuration
 def print_configuration_op(FLAGS):
-    print('[Configurations]:')
+    print('[配置]:')
     for name, value in FLAGS.flag_values_dict().items():
         print('\t%s: %s'%(name, str(value)))
-    print('End of configuration')
+    print('配置结束')
     
 
 def copy_update_configuration(FLAGS, updateDict = {}):
@@ -379,13 +379,13 @@ def get_existing_from_ckpt(ckpt, var_list=None, rest_zero=False, print_level=1):
             if(print_level >= 2):
                 print ("loading tensor: " + str(var.name) + ", shape " + str(npvariable.shape))
             if( var.shape != npvariable.shape ):
-                raise ValueError('Wrong shape in for {} in ckpt,expected {}, got {}.'.format(var.name, str(var.shape),
+                raise ValueError('检查点中变量 {} 的形状不正确，期望 {}, 实际 {}。'.format(var.name, str(var.shape),
                     str(npvariable.shape)))
             ops.append(var.assign(npvariable))
         else:
-            if(print_level >= 1): print("variable not found in ckpt: " + var.name)
+            if(print_level >= 1): print("在检查点中未找到变量：" + var.name)
             if rest_zero:
-                if(print_level >= 1): print("Assign Zero of " + str(var.shape))
+                if(print_level >= 1): print("将其设为零：" + str(var.shape))
                 npzeros = np.zeros((var.shape))
                 ops.append(var.assign(npzeros))
     return ops
@@ -449,12 +449,12 @@ def py_gif_summary(tag, images, max_outputs, fps):
         tag = tag.decode("utf-8")
     images = np.asarray(images)
     if images.dtype != np.uint8:
-        raise ValueError("Tensor must have dtype uint8 for gif summary.")
+        raise ValueError("GIF 摘要所需张量必须为 uint8 类型。")
     if images.ndim != 5:
-        raise ValueError("Tensor must be 5-D for gif summary.")
+        raise ValueError("GIF 摘要所需张量必须为 5 维。")
     batch_size, _, height, width, channels = images.shape
     if channels not in (1, 3):
-        raise ValueError("Tensors must have 1 or 3 channels for gif summary.")
+        raise ValueError("GIF 摘要所需张量通道数必须为 1 或 3。")
     
     summ = tf.Summary()
     num_outputs = min(batch_size, max_outputs)
@@ -466,9 +466,8 @@ def py_gif_summary(tag, images, max_outputs, fps):
         try:
             image_summ.encoded_image_string = encode_gif(images[i], fps)
         except (IOError, OSError) as e:
-            tf.logging.warning("Unable to encode images to a gif string because either ffmpeg is "
-                "not installed or ffmpeg returned an error: %s. Falling back to an "
-                "image summary of the first frame in the sequence.", e)
+            tf.logging.warning("无法将图像编码为 GIF 字符串：ffmpeg 未安装或返回错误：%s。"
+                "将回退为序列中第一帧的图像摘要。", e)
             try:
                 from PIL import Image  # pylint: disable=g-import-not-at-top
                 import io  # pylint: disable=g-import-not-at-top
@@ -476,7 +475,7 @@ def py_gif_summary(tag, images, max_outputs, fps):
                     Image.fromarray(images[i][0]).save(output, "PNG")
                     image_summ.encoded_image_string = output.getvalue()
             except:
-                tf.logging.warning("Gif summaries requires ffmpeg or PIL to be installed: %s", e)
+                tf.logging.warning("GIF 摘要需要安装 ffmpeg 或 PIL：%s", e)
                 image_summ.encoded_image_string = "".encode('utf-8') if is_bytes else ""
         if num_outputs == 1:
             summ_tag = "{}/gif".format(tag)

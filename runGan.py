@@ -11,7 +11,7 @@ runcase == ...  coming... data preparation and so on...
 import os, subprocess, sys, datetime, signal, shutil
 
 runcase = int(sys.argv[1])
-print ("Testing test case %d" % runcase)
+print ("正在测试用例 %d" % runcase)
 
 def preexec(): # Don't forward signals.
     os.setpgrp()
@@ -26,8 +26,8 @@ def folder_check(path):
     try_num = 1
     oripath = path[:-1] if path.endswith('/') else path
     while os.path.exists(path):
-        print("Delete existing folder " + path + "?(Y/N)")
-        decision = input()
+        print("删除现有文件夹 " + path + "? (Y/N)")
+        decision = input("请输入选择 [Y/N]: ")
         if decision == "Y":
             shutil.rmtree(path, ignore_errors=True)
             break
@@ -115,7 +115,7 @@ elif( runcase == 3 ): # Train TecoGAN
     if(not os.path.exists(VGGPath)): os.mkdir(VGGPath)
     if(not os.path.exists(VGGModelPath)):
         # Download the VGG 19 model from 
-        print("VGG model not found, downloading to %s"%VGGPath)
+        print("未找到 VGG 模型，正在下载到 %s"%VGGPath)
         cmd0 = "wget http://download.tensorflow.org/models/vgg_19_2016_08_28.tar.gz -O " + os.path.join(VGGPath, "vgg19.tar.gz")
         cmd0 += ";tar -xvf " + os.path.join(VGGPath,"vgg19.tar.gz") + " -C " + VGGPath + "; rm "+ os.path.join(VGGPath, "vgg19.tar.gz")
         subprocess.call(cmd0, shell=True)
@@ -127,7 +127,7 @@ elif( runcase == 3 ): # Train TecoGAN
     FRVSRModel = "model/ourFRVSR" 
     if(not os.path.exists(FRVSRModel+".data-00000-of-00001")):
         # Download our pre-trained FRVSR model
-        print("pre-trained FRVSR model not found, downloading")
+        print("未找到预训练 FRVSR 模型，正在下载")
         cmd0 = "wget http://ge.in.tum.de/download/2019-TecoGAN/FRVSR_Ours.zip -O model/ofrvsr.zip;"
         cmd0 += "unzip model/ofrvsr.zip -d model; rm model/ofrvsr.zip"
         subprocess.call(cmd0, shell=True)
@@ -237,11 +237,11 @@ elif( runcase == 3 ): # Train TecoGAN
     try: # catch interruption for training
         pid.communicate()
     except KeyboardInterrupt: # Ctrl + C to stop current training try to save the last model 
-        print("runGAN.py: sending SIGINT signal to the sub process...")
+        print("runGAN.py: 正在向子进程发送 SIGINT 信号...")
         pid.send_signal(signal.SIGINT)
         # try to save the last model 
         pid.communicate()
-        print("runGAN.py: finished...")
+        print("runGAN.py: 完成...")
         
         
 elif( runcase == 4 ): # Train FRVSR, loss = l2 warp + l2 content
@@ -289,8 +289,8 @@ elif( runcase == 4 ): # Train FRVSR, loss = l2 warp + l2 content
     try: # catch interruption for training
         pid.communicate()
     except KeyboardInterrupt: # Ctrl + C to stop current training try to save the last model 
-        print("runGAN.py: sending SIGINT signal to the sub process...")
+        print("runGAN.py: 正在向子进程发送 SIGINT 信号...")
         pid.send_signal(signal.SIGINT)
         # try to save the last model 
         pid.communicate()
-        print("runGAN.py: finished...")
+        print("runGAN.py: 完成...")

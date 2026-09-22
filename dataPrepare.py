@@ -7,13 +7,13 @@ from lib.data import video
 
 
 # ------------------------------------parameters------------------------------#
-parser = argparse.ArgumentParser(description='Process parameters.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('--start_id', default=2000, type=int, help='starting scene index')
-parser.add_argument('--duration', default=120, type=int, help='scene duration')
-parser.add_argument('--disk_path', default="/mnt/netdisk/data/video/", help='the path to save the dataset')
-parser.add_argument('--summary_dir', default="", help='the path to save the log')
-parser.add_argument('--REMOVE', action='store_true', help='whether to remove the original video file after data preparation')
-parser.add_argument('--TEST', action='store_true', help='verify video links, save information in log, no real video downloading!')
+parser = argparse.ArgumentParser(description='处理参数。', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('--start_id', default=2000, type=int, help='起始场景索引')
+parser.add_argument('--duration', default=120, type=int, help='场景持续时长')
+parser.add_argument('--disk_path', default="/mnt/netdisk/data/video/", help='数据集保存路径')
+parser.add_argument('--summary_dir', default="", help='日志保存路径')
+parser.add_argument('--REMOVE', action='store_true', help='是否在数据准备后删除原始视频文件')
+parser.add_argument('--TEST', action='store_true', help='验证视频链接并保存信息到日志，不真实下载视频！')
 
 Flags = parser.parse_args()
 
@@ -64,10 +64,10 @@ video_data_dict = {
 
 # ------------------------------------log------------------------------#
 def print_configuration_op(FLAGS):
-    print('[Configurations]:')
+    print('[配置]:')
     for name, value in FLAGS.__dict__.items():
         print('\t%s: %s'%(name, str(value)))
-    print('End of configuration')
+    print('配置结束')
     
 class MyLogger(object):
     def __init__(self):
@@ -88,7 +88,7 @@ print_configuration_op(Flags)
 
 # ------------------------------------tool------------------------------#
 def gen_frames(infile, outdir, width, height, start, duration, savePNG=True):
-    print("folder %s: %dx[%d,%d]//2 at frame %d of %s"
+    print("文件夹 %s: %dx[%d,%d]//2，帧 %d / %s"
         %(outdir, duration, width, height, start,infile,))
     
     if savePNG:
@@ -104,7 +104,7 @@ cur_id, valid_video, try_num = Flags.start_id, 0, 0
 
 for keys in video_data_dict:
     try_num += len(video_data_dict[keys])
-print("Try loading %dx%d."%(try_num, Flags.duration))
+print("尝试加载 %dx%d。"%(try_num, Flags.duration))
              
 ydl = youtube_dl.YoutubeDL( 
     {'format': 'bestvideo/best',
@@ -121,19 +121,19 @@ for keys in video_data_dict:
         info_dict = ydl.extract_info(tar_vid_input, download=saveframes)
         # we only need info_dict["ext"], info_dict["width"], info_dict["height"]
     except KeyboardInterrupt:
-        print("KeyboardInterrupt!")
+        print("用户中断！")
         exit()
     except:
-        print("youtube_dl error:" + tar_vid_input)
+        print("youtube_dl 错误:" + tar_vid_input)
         pass
     
     # check the downloaded video
     tar_vid_output = os.path.join(Flags.disk_path, keys+'.'+info_dict["ext"])
     if saveframes and (not os.path.exists(tar_vid_output)):
-        print("Skipped invalid link or other error:" + tar_vid_input)
+        print("跳过无效链接或其他错误:" + tar_vid_input)
         continue
     if info_dict["width"] < 400 or info_dict["height"] < 400:
-        print("Skipped videos of small size %dx%d"%(info_dict["width"] , info_dict["height"] ))
+        print("跳过尺寸过小的视频 %dx%d"%(info_dict["width"] , info_dict["height"] ))
         continue
     valid_video = valid_video + 1
     
@@ -146,8 +146,8 @@ for keys in video_data_dict:
         cur_id = cur_id+1
         
     if saveframes and Flags.REMOVE:
-        print("remove ", tar_vid_output)
+        print("删除 ", tar_vid_output)
         os.remove(tar_vid_output)
         
-print("Done: get %d valid folders with %d frames from %d videos." % (cur_id - Flags.start_id, Flags.duration, valid_video))
+print("完成：获取 %d 个有效文件夹，共 %d 帧，来自 %d 个视频。" % (cur_id - Flags.start_id, Flags.duration, valid_video))
 
