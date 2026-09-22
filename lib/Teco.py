@@ -29,7 +29,7 @@ def VGG19_slim(input, reuse, deep_list=None, norm_flag=True):
 # its inputs extend it to a spatio-temporal D, when using in TecoGAN function
 def discriminator_F(dis_inputs, FLAGS=None):
     if FLAGS is None:
-        raise ValueError('No FLAGS is provided for generator')
+        raise ValueError('判别器未提供 FLAGS 参数')
 
     # Define the discriminator block
     def discriminator_block(inputs, output_channel, kernel_size, stride, scope):

@@ -231,7 +231,7 @@ def varname(p):
 def print_numpy(x, val=True, shp=False):
     x = x.astype(np.float64)
     if shp:
-        print('shape,', x.shape)
+        print('形状：', x.shape)
     if val:
         x = x.flatten()
         print(

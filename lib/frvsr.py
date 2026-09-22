@@ -44,7 +44,7 @@ def fnet(fnet_input, reuse=False):
 def generator_F(gen_inputs, gen_output_channels, reuse=False, FLAGS=None):
     # Check the flag
     if FLAGS is None:
-        raise  ValueError('No FLAGS is provided for generator')
+        raise  ValueError('生成器未提供 FLAGS 参数')
 
     # The Bx residual blocks
     def residual_block(inputs, output_channel = 64, stride = 1, scope = 'res_block'):

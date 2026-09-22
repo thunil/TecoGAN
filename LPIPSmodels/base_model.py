@@ -47,7 +47,7 @@ class BaseModel():
         # embed()
         save_filename = '%s_net_%s.pth' % (epoch_label, network_label)
         save_path = os.path.join(self.save_dir, save_filename)
-        print('Loading network from %s'%save_path)
+        print('正在从 %s 加载网络' % save_path)
         network.load_state_dict(torch.load(save_path))
 
     def update_learning_rate():

@@ -69,7 +69,7 @@ class DistModel(BaseModel):
                 model_path = os.path.abspath(os.path.join(inspect.getfile(self.initialize), '..', 'v%s/%s.pth'%(version,net)))
 
             if(not is_train):
-                print('Loading model from: %s'%model_path)
+                print('正在从 %s 加载模型' % model_path)
                 self.net.load_state_dict(torch.load(model_path, **kw))
 
         elif(self.model=='net'): # pretrained network
@@ -83,7 +83,7 @@ class DistModel(BaseModel):
             self.net = networks.DSSIM(use_gpu=use_gpu,colorspace=colorspace)
             self.model_name = 'SSIM'
         else:
-            raise ValueError("Model [%s] not recognized." % self.model)
+            raise ValueError("模型 [%s] 未被识别。" % self.model)
 
         self.parameters = list(self.net.parameters())
 
@@ -98,7 +98,7 @@ class DistModel(BaseModel):
             self.net.eval()
 
         if(printNet):
-            print('---------- Networks initialized -------------')
+            print('---------- 网络已初始化 -------------')
             networks.print_network(self.net)
             print('-----------------------------------------------')
 
@@ -242,7 +242,7 @@ class DistModel(BaseModel):
         for param_group in self.optimizer_net.param_groups:
             param_group['lr'] = lr
 
-        print('update lr [%s] decay: %f -> %f' % (type,self.old_lr, lr))
+        print('更新学习率 [%s] 衰减：%f -> %f' % (type,self.old_lr, lr))
         self.old_lr = lr
 
 

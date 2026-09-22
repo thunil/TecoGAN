@@ -14,7 +14,7 @@ def inference_data_loader(FLAGS):
     downSP = False
     if (FLAGS.input_dir_LR is None) or (not os.path.exists(FLAGS.input_dir_LR)):
         if (FLAGS.input_dir_HR is None) or (not os.path.exists(FLAGS.input_dir_HR)):
-            raise ValueError('Input directory not found')
+            raise ValueError('未找到输入目录')
         filedir = FLAGS.input_dir_HR
         downSP = True
         
@@ -55,9 +55,9 @@ def loadHR_batch(FLAGS, tar_size):
     with tf.device('/cpu:0'):
         #Check the input directory
         if (FLAGS.input_video_dir == ''):
-            raise ValueError('Video input directory input_video_dir is not provided')
+            raise ValueError('未提供视频输入目录 input_video_dir')
         if (not os.path.exists(FLAGS.input_video_dir)):
-            raise ValueError('Video input directory not found')
+            raise ValueError('未找到视频输入目录')
             
         image_set_lists = []
         with tf.variable_scope('load_frame'):
@@ -65,7 +65,7 @@ def loadHR_batch(FLAGS, tar_size):
                 inputDir = os.path.join( FLAGS.input_video_dir, '%s_%04d' %(FLAGS.input_video_pre, dir_i) )
                 if (os.path.exists(inputDir)): # the following names are hard coded: col_high_
                     if not os.path.exists(os.path.join(inputDir ,'col_high_%04d.png' % FLAGS.max_frm) ):
-                        print("Skip %s, since foler doesn't contain enough frames!" % inputDir)
+                        print("跳过 %s，因为文件夹中的帧数不足！" % inputDir)
                         continue
                         
                     image_list = [ os.path.join(inputDir ,'col_high_%04d.png' % frame_i ) 
@@ -94,7 +94,7 @@ def loadHR_batch(FLAGS, tar_size):
             num_image_list_HR_t_cur = len(image_set_lists)*sequence_length
             HR_sequences, name_sequences = [], []
             if FLAGS.random_crop and FLAGS.mode == 'train':
-                print('[Config] Use random crop')
+                print('[配置] 使用随机裁剪')
                 # a k_w_border margin is in tar_size for gaussian blur
                 # have to use the same crop because crop_to_bounding_box only accept one value
                 offset_w = tf.cast(tf.floor(tf.random_uniform([], 0, \
@@ -102,10 +102,10 @@ def loadHR_batch(FLAGS, tar_size):
                 offset_h = tf.cast(tf.floor(tf.random_uniform([], 0, \
                     tf.cast(HR_shape[-3], tf.float32) - tar_size )),dtype=tf.int32) 
             else:
-                raise Exception('Not implemented') # train_data can have different resolutions, crop is necessary    
+                raise Exception('未实现') # train_data can have different resolutions, crop is necessary    
             
             if(FLAGS.movingFirstFrame): 
-                print('[Config] Move first frame')
+                print('[配置] 移动首帧')
                 # our data augmentation, moving first frame to mimic camera motion
                 # random motions, one slice use the same motion
                 offset_xy = tf.cast(tf.floor(tf.random_uniform([FLAGS.RNN_N, 2], -3.5,4.5)),dtype=tf.int32)
@@ -120,7 +120,7 @@ def loadHR_batch(FLAGS, tar_size):
                 fix_off_w = tf.clip_by_value(offset_w, 0, HR_shape[-2] - tar_size - range_pos[0])
             
             if FLAGS.flip and (FLAGS.mode == 'train'):
-                print('[Config] Use random flip')
+                print('[配置] 使用随机翻转')
                 # Produce the decision of random flip
                 flip_decision = tf.random_uniform([sequence_length], 0, 1, dtype=tf.float32)
                 
@@ -157,9 +157,9 @@ def loadHR_batch(FLAGS, tar_size):
             output_names = name_sequences
             
         if len(target_images)!=FLAGS.RNN_N:
-            raise ValueError('Length of target image sequence is incorrect,expected {}, got {}.'.format(FLAGS.RNN_N, len(target_images)))
+            raise ValueError('目标图像序列长度不正确，期望 {}, 实际 {}。'.format(FLAGS.RNN_N, len(target_images)))
         
-        print('Sequenced batches: {}, sequence length: {}'.format(num_image_list_HR_t_cur, FLAGS.RNN_N))
+        print('已排序批次：{}，序列长度：{}'.format(num_image_list_HR_t_cur, FLAGS.RNN_N))
         batch_list = tf.train.shuffle_batch(output_names + target_images, enqueue_many=True,\
                         batch_size=int(FLAGS.batch_size), capacity=FLAGS.video_queue_capacity+FLAGS.video_queue_batch*sequence_length,
                         min_after_dequeue=FLAGS.video_queue_capacity, num_threads=FLAGS.queue_thread, seed = FLAGS.rand_seed)
@@ -173,10 +173,10 @@ def loadHR(FLAGS, tar_size):
     with tf.device('/cpu:0'):
         #Check the input directory
         if (FLAGS.input_video_dir == ''):
-            raise ValueError('Video input directory input_video_dir is not provided')
+            raise ValueError('未提供视频输入目录 input_video_dir')
 
         if (not os.path.exists(FLAGS.input_video_dir)):
-            raise ValueError('Video input directory not found')
+            raise ValueError('未找到视频输入目录')
 
         image_list_HR_r = [[] for _ in range( FLAGS.RNN_N )] # all empty lists
         
@@ -184,7 +184,7 @@ def loadHR(FLAGS, tar_size):
             inputDir = os.path.join( FLAGS.input_video_dir, '%s_%04d' %(FLAGS.input_video_pre, dir_i) )
             if (os.path.exists(inputDir)): # the following names are hard coded
                 if not os.path.exists(os.path.join(inputDir ,'col_high_%04d.png' % FLAGS.max_frm) ):
-                    print("Skip %s, since foler doesn't contain enough frames!" % inputDir)
+                    print("跳过 %s，因为文件夹中的帧数不足！" % inputDir)
                     continue
                 for fi in range( FLAGS.RNN_N ):
                     image_list_HR_r[fi] += [ os.path.join(inputDir ,'col_high_%04d.png' % frame_i ) 
@@ -192,7 +192,7 @@ def loadHR(FLAGS, tar_size):
         
         num_image_list_HR_t_cur = len(image_list_HR_r[0])
         if num_image_list_HR_t_cur==0:
-            raise Exception('No frame files in the video input directory')
+            raise Exception('视频输入目录中没有帧文件')
                     
         image_list_HR_r = [tf.convert_to_tensor(_ , dtype=tf.string) for _ in image_list_HR_r ]
 
@@ -205,7 +205,7 @@ def loadHR(FLAGS, tar_size):
             data_list_HR_r = []# high res rgb, in range 0-1, shape any
                 
             if FLAGS.movingFirstFrame and FLAGS.mode == 'train': # our data augmentation, moving first frame to mimic camera motion
-                print('[Config] Use random crop')
+                print('[配置] 使用随机裁剪')
                 offset_xy = tf.cast(tf.floor(tf.random_uniform([FLAGS.RNN_N, 2], -3.5,4.5)),dtype=tf.int32)
                 # [FLAGS.RNN_N , 2], shifts
                 pos_xy = tf.cumsum(offset_xy, axis=0, exclusive=True) # relative positions
@@ -236,7 +236,7 @@ def loadHR(FLAGS, tar_size):
             with tf.name_scope('random_crop'):
                 # Check whether perform crop
                 if (FLAGS.random_crop is True) and FLAGS.mode == 'train':
-                    print('[Config] Use random crop')
+                    print('[配置] 使用随机裁剪')
                     target_size = tf.shape(target_images[0])
                     
                     offset_w = tf.cast(tf.floor(tf.random_uniform([], 0, \
@@ -249,12 +249,12 @@ def loadHR(FLAGS, tar_size):
                             offset_h, offset_w, tar_size, tar_size) 
                         
                 else:
-                    raise Exception('Not implemented')
+                    raise Exception('未实现')
             
             with tf.variable_scope('random_flip'):
                 # Check for random flip:
                 if (FLAGS.flip is True) and (FLAGS.mode == 'train'):
-                    print('[Config] Use random flip')
+                    print('[配置] 使用随机翻转')
                     # Produce the decision of random flip
                     flip_decision = tf.random_uniform([], 0, 1, dtype=tf.float32)
                     for frame_t in range(FLAGS.RNN_N):
@@ -264,12 +264,16 @@ def loadHR(FLAGS, tar_size):
                 target_images[frame_t].set_shape([tar_size, tar_size, 3])
                 
         if FLAGS.mode == 'train':
-            print('Sequenced batches: {}, sequence length: {}'.format(num_image_list_HR_t_cur, FLAGS.RNN_N))
-            batch_list = tf.train.shuffle_batch(output_names + target_images,\
-                            batch_size=int(FLAGS.batch_size), capacity=FLAGS.video_queue_capacity+FLAGS.video_queue_batch*FLAGS.max_frm,
-                            min_after_dequeue=FLAGS.video_queue_capacity, num_threads=FLAGS.queue_thread, seed = FLAGS.rand_seed)
+            print('已排序批次：{}，序列长度：{}'.format(num_image_list_HR_t_cur, FLAGS.RNN_N))
+            batch_list = tf.train.shuffle_batch(
+                output_names + target_images,
+                batch_size=int(FLAGS.batch_size),
+                capacity=FLAGS.video_queue_capacity + FLAGS.video_queue_batch * FLAGS.max_frm,
+                min_after_dequeue=FLAGS.video_queue_capacity,
+                num_threads=FLAGS.queue_thread,
+                seed=FLAGS.rand_seed)
         else:
-            raise Exception('Not implemented')
+            raise Exception('未实现')
     return batch_list, num_image_list_HR_t_cur # a k_w_border margin is still there for gaussian blur!!
 
 
@@ -285,10 +289,10 @@ def frvsr_gpu_data_loader(FLAGS, useValData_ph): # useValData_ph, tf bool placeh
     
     with tf.name_scope('load_frame_cpu'):
         with tf.name_scope('train_data'):
-            print("Preparing train_data")
+            print("准备训练数据")
             batch_list, num_image_list_HR_t_cur = loadHRfunc(FLAGS, tar_size)
         with tf.name_scope('validation_data'):
-            print("Preparing validation_data")
+            print("准备验证数据")
             val_capacity = 128 # TODO parameter!
             val_q_thread = 1   # TODO parameter!
             valFLAGS = copy_update_configuration(FLAGS, \

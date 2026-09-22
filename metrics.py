@@ -7,9 +7,9 @@ import LPIPSmodels.dist_model as dm
 from skimage.measure import compare_ssim
 
 from absl import flags
-flags.DEFINE_string('output', None, 'the path of output directory')
-flags.DEFINE_string('results', None, 'the list of paths of result directory')
-flags.DEFINE_string('targets', None, 'the list of paths of target directory')
+flags.DEFINE_string('output', None, '输出目录路径')
+flags.DEFINE_string('results', None, '结果目录路径列表')
+flags.DEFINE_string('targets', None, '目标目录路径列表')
 
 FLAGS = flags.FLAGS
 FLAGS(sys.argv)
@@ -19,10 +19,10 @@ if(not os.path.exists(FLAGS.output)):
     
 # The operation used to print out the configuration
 def print_configuration_op(FLAGS):
-    print('[Configurations]:')
+    print('[配置]:')
     for name, value in FLAGS.flag_values_dict().items():
         print('\t%s: %s'%(name, str(value)))
-    print('End of configuration')
+    print('配置结束')
 # custom Logger to write Log to file
 
 def listPNGinDir(dirpath):
@@ -135,7 +135,7 @@ for folder_i in range(folder_n):
     for i in range(cutfr, image_no-cutfr):
         output_img = cv2.imread(result[i])[:,:,::-1]
         target_img = cv2.imread(target[i])[:,:,::-1]
-        msg = "frame %d, tar %s, out %s, "%(i, str(target_img.shape), str(output_img.shape))
+        msg = "帧 %d, 目标 %s, 输出 %s, "%(i, str(target_img.shape), str(output_img.shape))
         if( target_img.shape[0] < output_img.shape[0]) or ( target_img.shape[1] < output_img.shape[1]): # target is not dividable by 4
             output_img = output_img[:target_img.shape[0],:target_img.shape[1]]
         print(result[i])
@@ -214,7 +214,7 @@ for folder_i in range(folder_n):
         num_data_sum = cur_list.sum()
         num_data_len = cur_list.shape[0]
         num_data_mean = num_data_sum / num_data_len
-        print("%s, max %02.4f, min %02.4f, avg %02.4f" % 
+        print("%s, 最大 %02.4f, 最小 %02.4f, 平均 %02.4f" % 
             (num_data, cur_list.max(), cur_list.min(), num_data_mean))
             
         if folder_i == 0:
@@ -232,9 +232,9 @@ for num_data in keys:
     sum_dict["FrameAvg_"+num_data] = pd.Series([sum_dict["FrameAvg_"+num_data] / len_dict[num_data]])
     folder_dict["FolderAvg_"+num_data] = pd.Series([folder_dict["FolderAvg_"+num_data] / folder_n])
     avg_dict["Avg_"+num_data] = pd.Series(np.float32(avg_dict["Avg_"+num_data]))
-    print("%s, total frame %d, total avg %02.4f, folder avg %02.4f" % 
+    print("%s, 总帧数 %d, 总平均 %02.4f, 文件夹平均 %02.4f" % 
         (num_data, len_dict[num_data], sum_dict["FrameAvg_"+num_data][0], folder_dict["FolderAvg_"+num_data][0]))
 pd.DataFrame(avg_dict).to_csv(os.path.join(FLAGS.output,"metrics.csv"), mode='a')
 pd.DataFrame(folder_dict).to_csv(os.path.join(FLAGS.output,"metrics.csv"), mode='a')
 pd.DataFrame(sum_dict).to_csv(os.path.join(FLAGS.output,"metrics.csv"), mode='a')
-print("Finished.")
+print("完成。")

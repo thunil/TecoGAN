@@ -200,7 +200,7 @@ def create_capture(source = 0, fallback = presets['chess']):
             cap.set(cv.CAP_PROP_FRAME_WIDTH, w)
             cap.set(cv.CAP_PROP_FRAME_HEIGHT, h)
     if cap is None or not cap.isOpened():
-        print('Warning: unable to open video source: ', source)
+        print('警告：无法打开视频源：', source)
         if fallback is not None:
             return create_capture(fallback, None)
     return cap
@@ -232,6 +232,6 @@ if __name__ == '__main__':
             for i, img in enumerate(imgs):
                 fn = '%s/shot_%d_%03d.bmp' % (shotdir, i, shot_idx)
                 cv.imwrite(fn, img)
-                print(fn, 'saved')
+                print(fn, '已保存')
             shot_idx += 1
     cv.destroyAllWindows()
